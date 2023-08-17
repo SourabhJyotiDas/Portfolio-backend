@@ -49,5 +49,5 @@ userSchema.methods.matchPassword = async function (password) {
 };
 
 // module.exports = mongoose.model("User", userSchema);
-const Payment = mongoose.model("User", userSchema);
-export default Payment;
+const User = mongoose.model("User", userSchema);
+export default User;

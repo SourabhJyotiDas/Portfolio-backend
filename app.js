@@ -36,6 +36,7 @@ app.get('/', async (req, res) => {
 //    res.send("<h1>Working Fine</h1>");
 // });
 
+// Routes
 app.use("/api/v1", user);
 app.use("/api/v1", project);
 

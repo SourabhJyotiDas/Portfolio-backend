@@ -70,7 +70,7 @@ export const updateProject = async (req, res) => {
          return errorHandler(res, 400, "You are not allowed to update")
       }
 
-      const { title, description, liveLink, githubLink, techStack, img } = req.body;
+      const { title, description, liveLink, githubLink, techStack, image  } = req.body;
 
       const project = await Project.findById(req.params.id);
 
@@ -91,12 +91,13 @@ export const updateProject = async (req, res) => {
       if (techStack) {
          project.techStack = techStack;
       }
-      if (img) {
+      if (image) {
          await cloudinary.v2.uploader.destroy(project.img.public_id);
 
-         const myCloud = await cloudinary.v2.uploader.upload(img, {
-            folder: "Projects",
+         const myCloud = await cloudinary.v2.uploader.upload(image, {
+            folder: "Projects"
          });
+
          project.img.public_id = myCloud.public_id;
          project.img.url = myCloud.secure_url;
       }
