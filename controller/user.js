@@ -2,7 +2,7 @@
 // const { errorHandler } = require("../middleware/error");
 // const User = require("../models/user");
 
-import  { errorHandler } from "../middleware/error.js";
+import { errorHandler } from "../middleware/error.js";
 import User from "../models/user.js";
 
 
@@ -28,8 +28,10 @@ export const register = async (req, res) => {
       const options = {
          expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
          httpOnly: true,
+         secure: true, // Set this to true when using SameSite=None
+         sameSite: "none",
       };
-      
+
 
       res.status(201).cookie("token", token, options).json({
          success: true,
@@ -70,6 +72,8 @@ export const login = async (req, res) => {
       const options = {
          expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
          httpOnly: true,
+         secure: true, // Set this to true when using SameSite=None
+         sameSite: "none",
       };
 
       res.status(200).cookie("token", token, options).json({
@@ -89,7 +93,12 @@ export const logout = async (req, res) => {
    try {
       res
          .status(200)
-         .cookie("token", null, { expires: new Date(Date.now()), httpOnly: true })
+         .cookie("token", null, {
+            expires: new Date(Date.now()),
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+         })
          .json({
             success: true,
             message: "Logged out successfully",
