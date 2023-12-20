@@ -14,7 +14,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
 app.use(cors(
    {
-      origin: "https://sourabhjyoti-das.netlify.app",
+      origin: ["https://sourabhjyoti-das.netlify.app", "http://localhost:3000"],
       credentials: true,
       methods: ["POST", "GET", "PUT", "DELETE"]
    }
